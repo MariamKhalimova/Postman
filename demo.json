@@ -1,37 +1,37 @@
 {
 	"info": {
-		"_postman_id": "ce1cf6cb-85b8-4d77-9ee6-09145c58a6ba",
-		"name": "Vikunja 2",
+		"_postman_id": "18646457-67fa-40d4-b330-406f75bccc79",
+		"name": "vikunja",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "21800480"
+		"_exporter_id": "2176834"
 	},
 	"item": [
 		{
-			"name": "POST/login",
+			"name": "post /login",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {\r",
-							"    pm.response.to.have.status(200);\r",
-							"});\r",
-							"\r",
-							"//Получить хедер из запроса и записать его переменную\r",
-							"\r",
-							"const response = JSON.parse(responseBody);\r",
-							"console.log(response.token);\r",
-							"\r",
-							"\r",
-							"//Записать токен в переменные global\r",
-							"pm.globals.set('tokenVikunja', response.token);\r",
-							"/*\r",
-							"//Записать токен вариант 2\r",
-							"pm.environment.set(\"tokenChallenge2\", pm.response.headers.get(\"X-Challenger\"));\r",
-							"*/\r",
-							"\r",
-							"const a = pm.response.json();\r",
-							"console.log(a)"
+							"pm.test(\"Status code is 200\", function () {",
+							"",
+							"     // Получить хедер из запроса и записать его в переменную",
+							" const response = JSON.parse(responseBody);",
+							"  console.log('response');",
+							" console.log(response.token);",
+							"",
+							"    // Записать токен в переменные global",
+							"pm.globals.set('tokenVikunja', response.token);",
+							"/*",
+							"// Записать токен вариант 2",
+							"pm.environment.set('tokenChallenge2',pm.response.headers.get(\"X-Challenger\"));",
+							"*/",
+							"const a = pm.response.json();",
+							"console.log(a);",
+							"",
+							"    pm.response.to.have.status(200);",
+							"",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -42,7 +42,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"demo\",\r\n    \"password\": \"demo\",\r\n    \"long_token\": false\r\n}",
+					"raw": "{\n    \"username\": \"demo\",\n    \"password\": \"demo\",\n    \"long_token\": false\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -67,13 +67,26 @@
 			"response": []
 		},
 		{
-			"name": "POST/register",
+			"name": "post /register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response time is less than 1000ms\", function () {",
+							"    pm.expect(pm.response.responseTime).to.be.below(1000);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"username\": \"{{$randomUserName}}\",\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"password\": \"{{$randomPassword}}\"\r\n}",
+					"raw": "{\n    \"username\": \"{{$randomUserName}}\",\n    \"email\": \"{{$randomEmail}}\",\n    \"password\": \"{{$randomPassword}}\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
